@@ -68,7 +68,7 @@ if st.session_state.answer1_answered:
     
     if submitted_answer2:
         if answer2_text in  ['Asgeir', '10']: # dra inn svarene her i egen tabell
-            st.success(f"Bra jobba! Det var Asgeir som bare ville overraske de andre med langtidstraktet kaffe. Meen det tok litt lengre tid enn antatt og han rakk ikke å komme på kontoret før de andre. Kaffetrakteren er nå tilbake på plassen sin og alle er fornøyd!")
+            st.success(f"Bra jobba! Det var Asgeir som bare ville overraske de andre med langtidstraktet påskekaffe. Meen det tok litt lengre tid enn antatt og han rakk ikke å komme på kontoret før de andre. Kaffetrakteren er nå tilbake på plassen sin og alle er fornøyd!")
             st.balloons()
         else:
             st.warning(f"Feil svar. Prøv igjen.")
