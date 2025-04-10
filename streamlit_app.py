@@ -14,9 +14,9 @@ Bruk SQL til å finne ut av hva som er borte og hvem som står bak handlingen.
 Tips: Start med `select * from tabeller` for å se hva du har å jobbe med.
 """)
 
-def query_db(query):
+def query_db(query, params=None):
     conn = st.connection('data_db', type='sql')
-    result = conn.query(query)
+    result = conn.query(query, params=params)
     return result
 
 if 'answer1_answered' not in st.session_state:
@@ -50,8 +50,20 @@ with answer1_form:
     answer1_text = st.text_input("Hva er borte?")
     submitted_answer1 = st.form_submit_button(label="Svar")
 
-if submitted_answer1:  
-    if answer1_text in ['Kaffetrakter', '21']: # dra inn svarene her i egen tabell
+if submitted_answer1:
+    try:  
+        res = query_db("""
+            SELECT (
+                    SELECT 1
+                    FROM _losning
+                    JOIN utstyr ON _losning.losning_id = utstyr.utstyr_id
+                    WHERE spm_id = 1 AND utstyr.navn LIKE :answer
+                ) AS riktig
+            """, params={"answer": answer1_text})
+    except Exception as e:
+        st.error(f"En feil oppstod: {e}")
+
+    if res['riktig'][0]:
         st.session_state.answer1_answered = True  
         st.success(f"Riktig! Finn svaret på spørsmålet under.")
     else:
@@ -67,8 +79,20 @@ if st.session_state.answer1_answered:
         submitted_answer2 = st.form_submit_button(label="Svar")
     
     if submitted_answer2:
-        if answer2_text in  ['Asgeir', '10']: # dra inn svarene her i egen tabell
-            st.success(f"Bra jobba! Det var Asgeir som bare ville overraske de andre med langtidstraktet påskekaffe. Meen det tok litt lengre tid enn antatt og han rakk ikke å komme på kontoret før de andre. Kaffetrakteren er nå tilbake på plassen sin og alle er fornøyd!")
+        try:  
+            res = query_db("""
+               SELECT (
+                    SELECT 1
+                    FROM _losning
+                    JOIN ansatt ON _losning.losning_id = ansatt.ansatt_id
+                    WHERE spm_id = 2 AND ansatt.navn LIKE :answer
+                ) AS riktig
+                """, params={"answer": answer2_text})
+        except Exception as e:
+            st.error(f"En feil oppstod: {e}")
+        
+        if res["riktig"][0]:
+            st.success(f"Bra jobba! Han ville bare overraske de andre med langtidstraktet påskekaffe. Meen det tok litt lengre tid enn antatt og han rakk ikke å komme på kontoret før de andre. Kaffetrakteren er nå tilbake på plassen sin og alle er fornøyd!")
             st.balloons()
         else:
             st.warning(f"Feil svar. Prøv igjen.")

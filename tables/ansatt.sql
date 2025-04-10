@@ -1,6 +1,6 @@
 CREATE TABLE ansatt (
     ansatt_id INTEGER PRIMARY KEY,
-    fornavn TEXT NOT NULL,
+    navn TEXT NOT NULL,
     kort_nr INTEGER NOT NULL,
     stilling TEXT,
     avdeling TEXT,
@@ -8,7 +8,7 @@ CREATE TABLE ansatt (
     epost TEXT
 );
 
-INSERT INTO ansatt (ansatt_id, fornavn, kort_nr, stilling, avdeling, ansatt_dato, epost) VALUES
+INSERT INTO ansatt (ansatt_id, navn, kort_nr, stilling, avdeling, ansatt_dato, epost) VALUES
 -- Kort_nr 1001-1005
 (1, 'Erik', 1001, 'Seniorrådgiver', 'Markedsføring', '2020-03-15', 'erik@bedrift.no'),
 (2, 'Anna', 1002, 'Produktsjef', 'Markedsføring', '2019-08-23', 'anna@bedrift.no'),
@@ -21,7 +21,7 @@ INSERT INTO ansatt (ansatt_id, fornavn, kort_nr, stilling, avdeling, ansatt_dato
 (7, 'Lars', 1007, 'HR-konsulent', 'HR', '2021-02-01', 'lars@bedrift.no'),
 (8, 'Ida', 1008, 'Systemutvikler', 'IT', '2019-04-12', 'ida@bedrift.no'),
 (9, 'Magnus', 1009, 'IT-sjef', 'IT', '2016-08-30', 'magnus@bedrift.no'),
-(10, 'Asgeir', 1010, 'Utvikler', 'IT', '2020-11-15', 'Asgeir@bedrift.no'),
+(10, 'Asgeir', 1010, 'Utvikler', 'IT', '2020-11-15', 'asgeir@bedrift.no'),
 
 -- Kort_nr 1011-1015
 (11, 'Andreas', 1011, 'Lagersjef', 'Logistikk', '2018-05-20', 'andreas@bedrift.no'),

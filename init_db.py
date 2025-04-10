@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 FILE_PATH = './tables/'
-FILES = ['utstyr.sql', 'utstyr_logg.sql', 'ansatt.sql', 'adgang_logg.sql', 'tabeller.sql']
+FILES = ['utstyr.sql', 'utstyr_logg.sql', 'ansatt.sql', 'adgang_logg.sql', 'tabeller.sql', '_losning.sql']
 
 def init_db():
     conn = sqlite3.connect('data.db')
