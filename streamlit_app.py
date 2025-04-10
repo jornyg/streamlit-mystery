@@ -1,5 +1,7 @@
 import streamlit as st
 
+st.set_page_config(initial_sidebar_state ="expanded", page_title="Kontormysteriet", page_icon=":male-detective:")
+
 st.sidebar.write("""
 Datoen er 7. april 2025. Det er en kald mandag morgen og du møter opp på jobb som vanlig, men det tar ikke lang tid før du oppdager at noe er galt. Kontorsjefen Astrid har samlet alle ansatte til et hastemøte i auditoriet, ansiktet hennes er alvorlig.
 
