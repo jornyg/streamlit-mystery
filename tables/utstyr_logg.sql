@@ -1,10 +1,12 @@
-CREATE TABLE utstyr_logg (
+CREATE TABLE IF NOT EXISTS utstyr_logg (
     logg_id INTEGER PRIMARY KEY,
     utstyr_id INTEGER NOT NULL,                  
     plassering TEXT,                       
     timestamp DATETIME,                         
     notat TEXT                           
 );
+
+DELETE FROM utstyr_logg;
 
 INSERT INTO utstyr_logg (utstyr_id, plassering, timestamp, notat) VALUES
 (1, 'Rom 201', '2025-01-10 09:30:00', 'Skjerm installert for ny medarbeider'),

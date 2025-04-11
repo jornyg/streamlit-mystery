@@ -1,10 +1,12 @@
-CREATE TABLE utstyr (
+CREATE TABLE IF NOT EXISTS utstyr (
     utstyr_id INTEGER PRIMARY KEY,  
     navn VARCHAR(100) NOT NULL,              
     kategori VARCHAR(50),                     
     farge VARCHAR(30),                        
     anskaffelsesdato DATE                     
 );
+
+DELETE FROM utstyr;
 
 INSERT INTO utstyr (utstyr_id, navn, kategori, farge, anskaffelsesdato) VALUES
 (1, 'Skjerm', 'Elektronikk', 'Svart', '2023-04-01'),

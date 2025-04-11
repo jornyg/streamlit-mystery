@@ -1,10 +1,12 @@
-CREATE TABLE adgang_logg (
+CREATE TABLE IF NOT EXISTS adgang_logg (
     logg_id INTEGER PRIMARY KEY,
     rom TEXT NOT NULL,
     kort_nr TEXT NOT NULL,
     timestamp TIMESTAMP,                     
     type TEXT            
 );
+
+DELETE FROM adgang_logg;
 
 INSERT INTO adgang_logg (rom, kort_nr, timestamp, type) VALUES
 ('Rom 201', 1001, '2025-01-05 08:00:12', 'inn'),

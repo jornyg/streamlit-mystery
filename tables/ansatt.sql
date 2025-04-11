@@ -1,4 +1,4 @@
-CREATE TABLE ansatt (
+CREATE TABLE IF NOT EXISTS ansatt (
     ansatt_id INTEGER PRIMARY KEY,
     navn TEXT NOT NULL,
     kort_nr INTEGER NOT NULL,
@@ -7,6 +7,8 @@ CREATE TABLE ansatt (
     ansatt_dato DATE,
     epost TEXT
 );
+
+DELETE FROM ansatt;
 
 INSERT INTO ansatt (ansatt_id, navn, kort_nr, stilling, avdeling, ansatt_dato, epost) VALUES
 -- Kort_nr 1001-1005

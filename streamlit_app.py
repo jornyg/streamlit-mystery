@@ -1,4 +1,5 @@
 import streamlit as st
+from init_db import init_db
 
 st.set_page_config(initial_sidebar_state ="expanded", page_title="Kontormysteriet", page_icon=":male-detective:")
 
@@ -16,8 +17,14 @@ Bruk SQL til å finne ut av hva som er borte og hvem som står bak handlingen.
 Tips: Start med `select * from tabeller` for å se hva du har å jobbe med.
 """)
 
-def query_db(query, params=None):
-    conn = st.connection('data_db', type='sql')
+if 'db_initialized' not in st.session_state:
+    init_db()
+    st.session_state.db_initialized = True
+
+conn = st.connection('data_db', type='sql')
+
+def query_db(conn, query, params=None):
+    
     result = conn.query(query, params=params)
     return result
 
@@ -36,7 +43,7 @@ with query_form:
 
 if submitted_query:
     try:
-        st.session_state.query_result = query_db(query_text)
+        st.session_state.query_result = query_db(conn, query_text)
     except Exception as e:
         st.error(f"En feil oppstod: {e}")
 
@@ -54,7 +61,9 @@ with answer1_form:
 
 if submitted_answer1:
     try:  
-        res = query_db("""
+        res = query_db(
+            conn,
+            """
             SELECT (
                     SELECT 1
                     FROM _losning
@@ -82,7 +91,9 @@ if st.session_state.answer1_answered:
     
     if submitted_answer2:
         try:  
-            res = query_db("""
+            res = query_db(
+                conn,
+                """
                SELECT (
                     SELECT 1
                     FROM _losning
